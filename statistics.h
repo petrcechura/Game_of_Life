@@ -23,9 +23,9 @@ public:
     ~statistics() override;
 
     //setters
-    bool l_cells_set(int amount);
-    bool tbb_cells_set(int amount);
-    bool population_set(int amount);
+    void l_cells_set(int amount);
+    void tbb_cells_set(int amount);
+    void population_set(int amount);
 
 private:
     Ui::statistics *ui;
