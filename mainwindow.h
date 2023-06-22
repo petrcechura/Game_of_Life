@@ -6,6 +6,10 @@
 #define GAME_OF_LIFE_MAINWINDOW_H
 
 #include <QMainWindow>
+#include "cellmatrix.h"
+#include "statistics.h"
+#include <QTimer>
+#include <QGridLayout>
 
 
 QT_BEGIN_NAMESPACE
@@ -22,6 +26,20 @@ public:
 
 private:
     Ui::MainWindow *ui;
+
+    // widgets
+    QWidget *central_widget;
+    CellMatrix *matrix_widget;
+    statistics *stats_widget;
+
+    // layout
+    QGridLayout *layout;
+
+    // timer
+    QTimer timer;
+
+private slots:
+    void timerTick();
 };
 
 

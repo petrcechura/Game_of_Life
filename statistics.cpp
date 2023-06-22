@@ -28,17 +28,17 @@ statistics::statistics(QWidget *parent) :
     setLayout(layout);
 }
 
-void statistics::l_cells_set(int amount) {
+void statistics::LCellsSet(int amount) {
         l_cells_am_l->setText("Living cells: " + QString::number(amount));
 }
 
 
-void statistics::tbb_cells_set(int amount) {
+void statistics::TbbCellsSet(int amount) {
     tbb_cells_l->setText("Cells to be born: " + QString::number(amount));
 }
 
 
-void statistics::population_set(int amount) {
+void statistics::PopulationSet(int amount) {
     population_l->setText("Population no. 0" + QString::number(amount));
 }
 
