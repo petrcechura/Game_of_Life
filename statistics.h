@@ -25,7 +25,6 @@ public:
 
     //setters
     void LCellsSet(int amount);
-    void TbbCellsSet(int amount);
     void PopulationInc();
 
 private:
@@ -33,8 +32,8 @@ private:
 
     // labels
     QLabel *l_cells_am_l;
-    QLabel *tbb_cells_l;
     QLabel *population_l;
+    // TODO labels for stability check, derivation of population...
 
     //layout
     QVBoxLayout *layout;

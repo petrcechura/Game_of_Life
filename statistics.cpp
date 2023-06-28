@@ -14,7 +14,6 @@ statistics::statistics(QWidget *parent) :
 
     //labels init
     l_cells_am_l = new QLabel(QString("Living cells: 0"));
-    tbb_cells_l = new QLabel(QString("Cells to be born: 0"));
     population_l = new QLabel(QString("Population no. "));
 
     // default pop no
@@ -24,7 +23,6 @@ statistics::statistics(QWidget *parent) :
     layout = new QVBoxLayout(this);
     layout->setAlignment(Qt::AlignCenter);
     layout->addWidget(l_cells_am_l);
-    layout->addWidget(tbb_cells_l);
     layout->addWidget(population_l);
 
     setLayout(layout);
@@ -34,10 +32,6 @@ void statistics::LCellsSet(int amount) {
         l_cells_am_l->setText("Living cells: " + QString::number(amount));
 }
 
-
-void statistics::TbbCellsSet(int amount) {
-    tbb_cells_l->setText("Cells to be born: " + QString::number(amount));
-}
 
 
 void statistics::PopulationInc() {
