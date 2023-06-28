@@ -5,7 +5,11 @@
 #ifndef GAME_OF_LIFE_BACKEND_H
 #define GAME_OF_LIFE_BACKEND_H
 
-#include <vector>
+#include <tuple>
+#include <iostream>
+#include <QDebug>
+#include <random>
+#include "statistics.h"
 
 
 // "static" class
@@ -13,33 +17,40 @@ class Backend {
 
 public:
     // default rule = S23/B3
-    Backend(const int &rows, const int &columns, const int to_survive = 23, const int to_be_born = 3);
+    Backend(const int &rows, const int &columns, std::string rules);
     ~Backend();
 
     // get current calculated positions to print
-    std::vector<int*> GetPositions();
+    std::vector<std::vector<int>> GetMatrix() { return matrix;};
     // create next population (calculate positions)
     void NextPop();
-
+    // get amount of current living cells
+    int GetCells() {return living_cells;};
 
 private:
 
-    std::vector<int*> positions;
+    std::vector<std::vector<int>> matrix;
     int rows;
     int columns;
-    int to_survive;
-    int to_be_born;
+    std::string to_survive;
+    std::string to_be_born;
+    int living_cells;
 
     // analyze cell and return amount of living around
-    int get_l_cells_around(const int &row, const int &column);
-    // find out whether this cell is living (in positions) or not
-    bool is_living(const int row, const int column);
+    int get_living_cells_around(const int &row, const int &column);
+    // create matrix
+    std::vector<std::vector<int>> create_matrix(const int &rows, const int &columns, const std::vector<std::pair<int, int>> def_positions);
+
+    // check if given string contains given number
+    inline bool contains_num(std::string str, int num);
 
     // predefined populations TODO
-    static std::vector<int*> oscillator_pop;
-    static std::vector<int*> still_life_pop;
-    static std::vector<int*> gun_pop;
-    static std::vector<int*> glider_pop;
+    std::vector<std::pair<int, int>> blank_pop();
+    std::vector<std::pair<int, int>> oscillator_pop();
+    std::vector<std::pair<int, int>> still_life_pop();
+    std::vector<std::pair<int, int>> gun_pop();
+    std::vector<std::pair<int, int>> glider_pop();
+    std::vector<std::pair<int, int>> random_pop();
 
 
 };

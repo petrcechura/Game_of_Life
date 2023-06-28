@@ -6,8 +6,7 @@
 
 #include "statistics.h"
 #include "ui_statistics.h"
-#include "string"
-#include "QVBoxLayout"
+
 
 statistics::statistics(QWidget *parent) :
         QWidget(parent), ui(new Ui::statistics) {
@@ -16,7 +15,10 @@ statistics::statistics(QWidget *parent) :
     //labels init
     l_cells_am_l = new QLabel(QString("Living cells: 0"));
     tbb_cells_l = new QLabel(QString("Cells to be born: 0"));
-    population_l = new QLabel(QString("Population no. 0"));
+    population_l = new QLabel(QString("Population no. "));
+
+    // default pop no
+    pop_no = 0;
 
     // layout definition
     layout = new QVBoxLayout(this);
@@ -38,8 +40,9 @@ void statistics::TbbCellsSet(int amount) {
 }
 
 
-void statistics::PopulationSet(int amount) {
-    population_l->setText("Population no. 0" + QString::number(amount));
+void statistics::PopulationInc() {
+    population_l->setText("Population no. " + QString::number(pop_no));
+    pop_no++;
 }
 
 

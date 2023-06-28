@@ -8,14 +8,14 @@
 #include "ui_mainwindow.h"
 
 
-MainWindow::MainWindow(QWidget *parent) :
+MainWindow::MainWindow(QWidget *parent, const int &rows, const int &columns) :
         QMainWindow(parent), ui(new Ui::MainWindow) {
     ui->setupUi(this);
 
 
     // widgets
     central_widget = new QWidget(this);
-    matrix_widget = new CellMatrix(this, 100, 100);
+    matrix_widget = new CellMatrix(this, rows, columns);
     stats_widget = new statistics(this);
 
     // layout set
@@ -25,17 +25,22 @@ MainWindow::MainWindow(QWidget *parent) :
     layout->addWidget(stats_widget, 0, 1);
     this->setCentralWidget(central_widget);
 
+    // backend init
+    backend = new Backend(rows, columns, "S23/B3");
+    
+
     // timer set
-    timer.setInterval(1000);
+    timer.setInterval(100);
     timer.start();
     QObject::connect(&timer, SIGNAL(timeout()), this, SLOT(timerTick()));
 }
 
 void MainWindow::timerTick() {
-    std::vector<int*> pos = {{0, 0}};
-    //matrix_widget->Set_cells(pos);
-    qDebug() << "Tick...";
-
+    
+    matrix_widget->Update_matrix(backend->GetMatrix());
+    backend->NextPop();
+    stats_widget->PopulationInc();
+    stats_widget->LCellsSet(backend->GetCells());
 }
 
 MainWindow::~MainWindow() {

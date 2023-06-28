@@ -6,8 +6,7 @@
 #define GAME_OF_LIFE_MAINWINDOW_H
 
 #include <QMainWindow>
-#include "cellmatrix.h"
-#include "statistics.h"
+#include "Backend.h"
 #include <QTimer>
 #include <QGridLayout>
 
@@ -20,7 +19,7 @@ class MainWindow : public QMainWindow {
 Q_OBJECT
 
 public:
-    explicit MainWindow(QWidget *parent = nullptr);
+    explicit MainWindow(QWidget *parent = nullptr, const int &rows = 100, const int &columns = 100);
 
     ~MainWindow() override;
 
@@ -31,6 +30,9 @@ private:
     QWidget *central_widget;
     CellMatrix *matrix_widget;
     statistics *stats_widget;
+
+    // Backend for calculation
+    Backend *backend;
 
     // layout
     QGridLayout *layout;

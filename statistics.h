@@ -5,9 +5,10 @@
 #ifndef GAME_OF_LIFE_STATISTICS_H
 #define GAME_OF_LIFE_STATISTICS_H
 
-#include <QWidget>
 #include <QLabel>
 #include <QVBoxLayout>
+#include <string>
+#include "cellmatrix.h"
 
 
 QT_BEGIN_NAMESPACE
@@ -25,7 +26,7 @@ public:
     //setters
     void LCellsSet(int amount);
     void TbbCellsSet(int amount);
-    void PopulationSet(int amount);
+    void PopulationInc();
 
 private:
     Ui::statistics *ui;
@@ -37,6 +38,8 @@ private:
 
     //layout
     QVBoxLayout *layout;
+
+    long int pop_no;
 
 };
 
