@@ -66,7 +66,7 @@ CellMatrix::CellMatrix(QWidget *parent, const int &rows, const int &columns) :
         QGraphicsView(parent), ui(new Ui::CellMatrix) {
     ui->setupUi(this);
 
-    this->setGeometry( QRect(0, 0, 800, 800));
+    this->setGeometry( QRect(0, 0, 700, 700));
     // scene
     scene = new QGraphicsScene(this);
     this->setScene(scene);

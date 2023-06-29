@@ -5,14 +5,7 @@
 #ifndef GAME_OF_LIFE_CELLMATRIX_H
 #define GAME_OF_LIFE_CELLMATRIX_H
 
-#include <QWidget>
-#include <QGraphicsView>
-#include <QGridLayout>
-#include <vector>
-#include <QGraphicsRectItem>
-#include <QDebug>
-#include <QTimer>
-#include <QRect>
+#include "PopCreator.h"
 
 
 QT_BEGIN_NAMESPACE

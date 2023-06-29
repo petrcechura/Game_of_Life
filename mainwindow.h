@@ -5,7 +5,6 @@
 #ifndef GAME_OF_LIFE_MAINWINDOW_H
 #define GAME_OF_LIFE_MAINWINDOW_H
 
-#include <QMainWindow>
 #include "Backend.h"
 #include <QTimer>
 #include <QGridLayout>

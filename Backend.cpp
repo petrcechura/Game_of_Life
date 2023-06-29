@@ -32,22 +32,15 @@ std::vector<std::pair<int, int>> Backend::glider_pop() {
     //  010
     //  001
     //  111
-    try
-    {
         positions.push_back(std::pair<int, int>(center_row - 1, center_column));
         positions.push_back(std::pair<int, int>(center_row, center_column + 1));
         positions.push_back(std::pair<int, int>(center_row + 1, center_column - 1));
         positions.push_back(std::pair<int, int>(center_row + 1, center_column));
         positions.push_back(std::pair<int, int>(center_row + 1, center_column + 1));
-    }
-    catch(const std::exception& e)
-    {
-        std::cerr << e.what() << '\n';
-    }
-    
     
     return positions;
 }
+
 
 
 

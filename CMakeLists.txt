@@ -14,7 +14,7 @@ find_package(Qt5 COMPONENTS
         Widgets
         REQUIRED)
 
-add_executable(Game_of_Life main.cpp statistics.cpp statistics.h statistics.ui cellmatrix.cpp cellmatrix.h cellmatrix.ui mainwindow.h mainwindow.cpp Backend.h Backend.cpp Backend.cpp)
+add_executable(Game_of_Life main.cpp statistics.cpp statistics.h statistics.ui cellmatrix.cpp cellmatrix.h cellmatrix.ui mainwindow.h mainwindow.cpp Backend.h Backend.cpp PopCreator.h PopCreator.cpp )
 target_link_libraries(Game_of_Life
         Qt5::Core
         Qt5::Gui
