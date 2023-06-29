@@ -44,5 +44,8 @@ void statistics::PopulationInc() {
 
 
 statistics::~statistics() {
+    delete l_cells_am_l;
+    delete population_l;
+    delete layout;
     delete ui;
 }

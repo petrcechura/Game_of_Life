@@ -2,8 +2,6 @@
 // Created by petr on 30.5.23.
 //
 
-// You may need to build the project (run Qt uic code generator) to get "ui_Cell_matrix.h" resolved
-
 #include "cellmatrix.h"
 #include "ui_cellmatrix.h"
 

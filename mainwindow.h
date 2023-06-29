@@ -40,6 +40,9 @@ private:
     // timer
     QTimer timer;
 
+    // delay before next population
+    int delay_ms;
+
 private slots:
     void timerTick();
 };

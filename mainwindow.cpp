@@ -28,9 +28,11 @@ MainWindow::MainWindow(QWidget *parent, const int &rows, const int &columns) :
     // backend init
     backend = new Backend(rows, columns, "S23/B3");
     
+    // timer delay (default)
+    delay_ms = 100; 
 
     // timer set
-    timer.setInterval(100);
+    timer.setInterval(delay_ms);
     timer.start();
     QObject::connect(&timer, SIGNAL(timeout()), this, SLOT(timerTick()));
 }

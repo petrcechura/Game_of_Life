@@ -42,10 +42,6 @@ private:
     // matrix of cells
     std::vector<std::vector<QGraphicsRectItem*>>* create_cell_matrix(unsigned int rows, unsigned int columns);
     std::vector<std::vector<QGraphicsRectItem*>> *cellmatrix;
-    /*
-     *  pos[x] =  positions to right from left-up corner
-     *  pos[x+1] = positions to down from left-up corner
-     */
 
     // clear whole matrix (make all cells dead)
     void clearCells();
