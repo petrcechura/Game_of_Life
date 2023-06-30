@@ -9,6 +9,7 @@
 #include <iostream>
 #include <QDebug>
 #include <random>
+#include <time.h>
 #include "statistics.h"
 
 

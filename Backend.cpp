@@ -11,7 +11,7 @@ std::vector<std::pair<int, int>> Backend::blank_pop() {
 
 std::vector<std::pair<int, int>> Backend::random_pop() {
     std::vector<std::pair<int, int>> positions;
-    
+    srand(time(0));
     for (int i = 0; i < rows; i++) {
         for (int j = 0; j < columns; j++)  {
             if (rand() % 2 == 1)  {
