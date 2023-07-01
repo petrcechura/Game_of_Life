@@ -23,6 +23,7 @@ Q_OBJECT
 public:
     explicit PopCreator(QWidget *parent = nullptr, const int &rows = 100, const int &columns = 100);
 
+    // Get positions of buttons that have been clicked on (-> are black)
     std::vector<std::pair<int, int>> GetPositions();
 
     ~PopCreator() override;
@@ -32,12 +33,12 @@ private:
     QWidget *central_widget;
     QGridLayout *layout;
 
-    // subset of rectangles;
+    // Matrix of rectangles (buttons)
     std::vector<std::vector<QPushButton*>> *rectangles;
 
 private slots:
-    // on click fuction (for all buttons)
-    void onClick(int row, int column);
+    // on click fuction; recolours button from white to black and viceversa
+    void onClick(int row, int col);
 
 
 
