@@ -3,12 +3,16 @@
 
 PopCreator::PopCreator(QWidget *parent, const int &rows, const int &columns) : 
         QMainWindow(parent) {
+        
+        const int btn_size = 15;
 
         // set widget
         central_widget = new QWidget(this);
-        layout = new QGridLayout(this);
-        this->setLayout(layout);
-        this->show();
+        central_widget->setFixedSize(QSize(rows * btn_size, columns * btn_size));
+        layout = new QGridLayout();
+        layout->setGeometry(QRect(0, 0, rows * btn_size, columns * btn_size));
+        layout->setSpacing(0);
+        central_widget->setLayout(layout);
         this->setCentralWidget(central_widget);
 
 
@@ -18,10 +22,18 @@ PopCreator::PopCreator(QWidget *parent, const int &rows, const int &columns) :
             rectangles->push_back(std::vector<QPushButton*>());
             for (int j = 0; j < columns; j++)  {          
                 QPushButton *btn = new QPushButton(this);
-                QObject::connect(btn, SIGNAL(clicked()), this, SLOT(onClick(i, j)));
+                btn->setGeometry(i * 10,
+                                 j * 10,
+                                 10,
+                                 10);
+                btn->setFixedSize(QSize(btn_size, btn_size));
+                layout->addWidget(btn, i, j);
                 (*rectangles)[i].push_back(btn);
+                QObject::connect((*rectangles)[i][j], SIGNAL(clicked()), this, SLOT([&] { rectangles[0][i][j]->setText("X");}));
             }
         }
+
+        this->show();
 }
 
 void PopCreator::onClick(int row, int column)  {

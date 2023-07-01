@@ -26,8 +26,6 @@ std::vector<std::vector<QGraphicsRectItem*>>* CellMatrix::create_cell_matrix(uns
         }
     }
 
-    qDebug() << "Matrix: " << matrix->size() << "x" << matrix[0].size();
-
     return matrix;
 }
 
@@ -101,14 +99,8 @@ CellMatrix::~CellMatrix() {
     for (auto item : scene->items()) {
         delete item;
     }
-    for (auto arr : *cellmatrix)  {
-        for (auto item : arr) {
-            delete item;
-        }
-    }
-    delete cellmatrix;
     delete scene;
-    delete layout;
+    delete cellmatrix;
     delete ui;
 }
 

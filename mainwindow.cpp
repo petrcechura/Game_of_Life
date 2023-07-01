@@ -47,9 +47,7 @@ void MainWindow::timerTick() {
 
 MainWindow::~MainWindow() {
 
-    delete stats_widget;
-    delete matrix_widget;
     delete central_widget;
-    delete layout;
     delete ui;
+    //delete this;
 }
