@@ -8,7 +8,7 @@
 #include "ui_statistics.h"
 
 
-statistics::statistics(QWidget *parent) :
+Statistics::Statistics(QWidget *parent) :
         QWidget(parent), ui(new Ui::statistics) {
     ui->setupUi(this);
 
@@ -28,13 +28,13 @@ statistics::statistics(QWidget *parent) :
     setLayout(layout);
 }
 
-void statistics::LCellsSet(int amount) {
+void Statistics::LCellsSet(int amount) {
         l_cells_am_l->setText("Living cells: " + QString::number(amount));
 }
 
 
 
-void statistics::PopulationInc() {
+void Statistics::PopulationInc() {
     population_l->setText("Population no. " + QString::number(pop_no));
     pop_no++;
 }
@@ -43,7 +43,7 @@ void statistics::PopulationInc() {
 
 
 
-statistics::~statistics() {
+Statistics::~Statistics() {
     delete l_cells_am_l;
     delete population_l;
     delete layout;

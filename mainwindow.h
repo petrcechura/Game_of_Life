@@ -28,7 +28,7 @@ private:
     // widgets
     QWidget *central_widget;
     CellMatrix *matrix_widget;
-    statistics *stats_widget;
+    Statistics *stats_widget;
 
     // Backend for calculation
     Backend *backend;

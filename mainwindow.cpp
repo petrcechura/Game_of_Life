@@ -16,7 +16,7 @@ MainWindow::MainWindow(QWidget *parent, const int &rows, const int &columns) :
     // widgets
     central_widget = new QWidget(this);
     matrix_widget = new CellMatrix(this, rows, columns);
-    stats_widget = new statistics(this);
+    stats_widget = new Statistics(this);
 
     // layout set
     layout = new QGridLayout(central_widget);

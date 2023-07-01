@@ -23,8 +23,10 @@ public:
 
     // get current calculated positions to print
     std::vector<std::vector<int>> GetMatrix() { return matrix;};
+    
     // create next population (calculate positions)
     void NextPop();
+
     // get amount of current living cells
     int GetCells() {return living_cells;};
 
@@ -37,7 +39,7 @@ private:
     std::string to_be_born;
     int living_cells;
 
-    // analyze cell and return amount of living around
+    // analyze cell and return amount of living cells around
     int get_living_cells_around(const int &row, const int &column);
     // create matrix
     std::vector<std::vector<int>> create_matrix(const int &rows, const int &columns, const std::vector<std::pair<int, int>> def_positions);

@@ -15,13 +15,13 @@ QT_BEGIN_NAMESPACE
 namespace Ui { class statistics; }
 QT_END_NAMESPACE
 
-class statistics : public QWidget {
+class Statistics : public QWidget {
 Q_OBJECT
 
 public:
-    explicit statistics(QWidget *parent = nullptr);
+    explicit Statistics(QWidget *parent = nullptr);
 
-    ~statistics() override;
+    ~Statistics() override;
 
     //setters
     void LCellsSet(int amount);

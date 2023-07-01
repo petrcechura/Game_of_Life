@@ -34,7 +34,7 @@ private:
     QGridLayout *layout;
 
     // Matrix of rectangles (buttons)
-    std::vector<std::vector<QPushButton*>> *rectangles;
+    std::vector<std::vector<QPushButton*>> *btn_matrix;
 
 private slots:
     // on click fuction; recolours button from white to black and viceversa
