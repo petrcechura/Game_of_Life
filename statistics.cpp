@@ -5,12 +5,10 @@
 // You may need to build the project (run Qt uic code generator) to get "ui_statistics.h" resolved
 
 #include "statistics.h"
-#include "ui_statistics.h"
 
 
 Statistics::Statistics(QWidget *parent) :
-        QWidget(parent), ui(new Ui::statistics) {
-    ui->setupUi(this);
+        QWidget(parent) {
 
     //labels init
     l_cells_am_l = new QLabel(QString("Living cells: 0"));
@@ -47,5 +45,4 @@ Statistics::~Statistics() {
     delete l_cells_am_l;
     delete population_l;
     delete layout;
-    delete ui;
 }

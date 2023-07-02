@@ -3,7 +3,6 @@
 //
 
 #include "cellmatrix.h"
-#include "ui_cellmatrix.h"
 
 std::vector<std::vector<QGraphicsRectItem*>>* CellMatrix::create_cell_matrix(unsigned int rows, unsigned int columns) {
     // rectangle size TODO automatic size calculation
@@ -61,8 +60,7 @@ void CellMatrix::clearCells() {
 
 
 CellMatrix::CellMatrix(QWidget *parent, const int &rows, const int &columns) :
-        QGraphicsView(parent), ui(new Ui::CellMatrix) {
-    ui->setupUi(this);
+        QGraphicsView(parent)  {
 
     this->setGeometry( QRect(0, 0, 700, 700));
     // scene
@@ -101,6 +99,5 @@ CellMatrix::~CellMatrix() {
     }
     delete scene;
     delete cellmatrix;
-    delete ui;
 }
 
