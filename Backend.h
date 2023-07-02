@@ -36,6 +36,9 @@ public:
     // add new population that can be used later
     void AddPop(t_pop pop);
 
+    // set rules for calculations
+    void SetRules(std::string rules);
+
 private:
 
     std::array<std::array<int, COLUMNS>, ROWS> matrix;

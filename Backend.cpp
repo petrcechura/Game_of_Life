@@ -46,21 +46,27 @@ t_pop Backend::glider_pop() {
 
 Backend::Backend(std::string rules) {
 
-    int to_sur = rules.find('S');
-    int to_bb = rules.find('B');
+    SetRules(rules);
+    NewPop();
+}
+
+void Backend::SetRules(std::string rules)  {
+    
+    int middle = rules.find('/');
     to_survive = "";
     to_be_born = "";
 
     // loop through rules from character S to get whole "to survive" string 
-    for (int i = to_sur+1; i < to_bb-1; i++)  {
-        to_survive += rules[i];
+    for (int i = 0; i < middle; i++)  {
+        if (rules[i] < 58 && rules[i] > 47)
+            to_survive += rules[i];
     }
     // same but with "to be born"
-    for (int i = to_bb+1; i < rules.size(); i++)  {
-        to_be_born += rules[i];
+    for (int i = middle + 1; i < rules.size(); i++)  {
+        if (rules[i] < 58 && rules[i] > 47)
+            to_be_born += rules[i];
     }
 
-    NewPop();
 }
 
 std::array<std::array<int, COLUMNS>, ROWS> Backend::create_matrix(const t_pop def_positions)  {

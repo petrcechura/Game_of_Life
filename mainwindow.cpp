@@ -39,6 +39,7 @@ MainWindow::MainWindow(QWidget *parent) :
     QObject::connect(controls_widget, &Controls::start, this, &MainWindow::start);
     QObject::connect(controls_widget, &Controls::pause, this, &MainWindow::pause);
     QObject::connect(controls_widget, &Controls::restart, this, &MainWindow::restart);
+    QObject::connect(controls_widget, &Controls::apply, this, &MainWindow::apply);
 }
 
 void MainWindow::timerTick() {
@@ -58,7 +59,11 @@ void MainWindow::pause()  {
 }
 
 void MainWindow::restart()  {
-    //backend->NewPop(RANDOM_POP);
+    backend->NewPop();
+}
+
+void MainWindow::apply()  {
+    backend->SetRules(controls_widget->GetRules());
 }
 
 MainWindow::~MainWindow() {

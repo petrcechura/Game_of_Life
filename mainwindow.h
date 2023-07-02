@@ -47,6 +47,7 @@ private slots:
     void timerTick();
     void start();
     void pause();
+    void apply();
     void restart();
 };
 

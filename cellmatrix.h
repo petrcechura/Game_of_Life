@@ -6,6 +6,7 @@
 #define GAME_OF_LIFE_CELLMATRIX_H
 
 #include "PopCreator.h"
+#include <thread>
 
 #define ROWS 100
 #define COLUMNS 100

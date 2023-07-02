@@ -37,6 +37,7 @@ private:
     QPushButton* btn_restart;
     // apply selected rules (&& check their validity)
     QPushButton* btn_apply;
+    void apply_func();
 
     // label to show curent rules
     QLabel* rules_label;

@@ -28,9 +28,21 @@ Controls::Controls(QWidget* parent) :
     QObject::connect(btn_start, &QPushButton::clicked, this, &Controls::start);
     QObject::connect(btn_pause, &QPushButton::clicked, this, &Controls::pause);
     QObject::connect(btn_restart, &QPushButton::clicked, this, &Controls::restart);
-    QObject::connect(btn_apply, &QPushButton::clicked, this, &Controls::apply);
+    QObject::connect(btn_apply, &QPushButton::clicked, this, &Controls::apply_func);
+
 }
 
+void Controls::apply_func()  {
+
+    auto txt = rules_entry->text();
+
+    if (txt.length() < 21 && txt.contains('/'))  {
+
+        rules_label->setText(rules_entry->text());
+        emit apply();
+    }
+
+}
 
 std::string Controls::GetRules()  {
     return rules_label->text().toStdString();
