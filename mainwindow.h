@@ -5,7 +5,7 @@
 #ifndef GAME_OF_LIFE_MAINWINDOW_H
 #define GAME_OF_LIFE_MAINWINDOW_H
 
-#include "Backend.h"
+#include "Controls.h"
 #include <QTimer>
 #include <QGridLayout>
 
@@ -29,6 +29,7 @@ private:
     QWidget *central_widget;
     CellMatrix *matrix_widget;
     Statistics *stats_widget;
+    Controls *controls_widget;
 
     // Backend for calculation
     Backend *backend;
@@ -44,6 +45,8 @@ private:
 
 private slots:
     void timerTick();
+    void start();
+    void pause();
 };
 
 

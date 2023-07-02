@@ -1,27 +1,33 @@
+
+
+
+#ifndef GAME_OF_LIFE_CONTROLS_H
+#define GAME_OF_LIFE_CONTROLS_H
+
+
 #include <QWidget>
 #include <QPushButton>
 #include <QLabel>
 #include <QLineEdit>
 #include <QVBoxLayout>
 #include <QObject>
+#include "Backend.h"
+
 
 class Controls : public QWidget
 {
 Q_OBJECT
 
 public:
-    Controls::Controls(QWidget* parent);
-    Controls::~Controls();
+    Controls(QWidget* parent);
+    ~Controls();
 
-    void Start();
-    void Pause();
-    void Restart();
+    std::string GetRules();
 
 private:
+
     // layout
     QVBoxLayout* layout;
-
-
 
     // start/resume the game
     QPushButton* btn_start;
@@ -39,6 +45,12 @@ private:
 
     // TODO list to show avaiable pops
 
-
+public slots:
+    void start();
+    void pause();
+    void restart();
+    void apply();
 
 };
+
+#endif 
