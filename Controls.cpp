@@ -31,21 +31,6 @@ Controls::Controls(QWidget* parent) :
     QObject::connect(btn_apply, &QPushButton::clicked, this, &Controls::apply);
 }
 
-void Controls::start()  {
-
-}
-
-void Controls::pause()  {
-
-}
-
-void Controls::restart()  {
-
-}
-
-void Controls::apply()  {
-    // TODO check correct format of rules
-}
 
 std::string Controls::GetRules()  {
     return rules_label->text().toStdString();

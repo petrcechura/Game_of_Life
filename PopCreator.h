@@ -2,16 +2,22 @@
 #include <QMainWindow>
 #include <QGraphicsView>
 #include <QGridLayout>
+#include <array>
 #include <vector>
 #include <QGraphicsRectItem>
 #include <QDebug>
 #include <QPushButton>
 #include <QTimer>
 #include <QRect>
+#include <memory>
 
 #ifndef GAME_OF_LIFE_POPCREATOR_H
 #define GAME_OF_LIFE_POPCREATOR_H
 
+#define P_ROWS 50
+#define P_COLUMNS 50
+
+#define t_pop std::vector<std::pair<int, int>>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class QMainWindow; }
@@ -21,10 +27,10 @@ class PopCreator : public QMainWindow {
 Q_OBJECT
 
 public:
-    explicit PopCreator(QWidget *parent = nullptr, const int &rows = 100, const int &columns = 100);
+    explicit PopCreator(QWidget *parent);
 
     // Get positions of buttons that have been clicked on (-> are black)
-    std::vector<std::pair<int, int>> GetPositions();
+    t_pop GetPositions();
 
     ~PopCreator() override;
 
@@ -34,7 +40,7 @@ private:
     QGridLayout *layout;
 
     // Matrix of rectangles (buttons)
-    std::vector<std::vector<QPushButton*>> *btn_matrix;
+    std::array<std::array<QPushButton*, P_COLUMNS>, P_ROWS> *btn_matrix;;
 
 private slots:
     // on click fuction; recolours button from white to black and viceversa

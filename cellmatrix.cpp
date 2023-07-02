@@ -4,36 +4,35 @@
 
 #include "cellmatrix.h"
 
-std::vector<std::vector<QGraphicsRectItem*>>* CellMatrix::create_cell_matrix(unsigned int rows, unsigned int columns) {
+std::array<std::array<QGraphicsRectItem*, COLUMNS>, ROWS> CellMatrix::create_cell_matrix() {
     // rectangle size TODO automatic size calculation
     int height = 7;
     int width = 7;
 
     //dynamic matrix declaration
-    std::vector<std::vector<QGraphicsRectItem*>> *matrix = new std::vector<std::vector<QGraphicsRectItem*>>();
+    std::array<std::array<QGraphicsRectItem*, COLUMNS>, ROWS> matrix;
 
     //matrix filling
-    for (int i = 0; i < rows; i++)  {
-        matrix->push_back(std::vector<QGraphicsRectItem*>());
-        for (int j = 0; j < columns; j++)  {
+    for (int i = 0; i < ROWS; i++)  {
+        for (int j = 0; j < COLUMNS; j++)  {
             QRect rect(i * width,
                        j * height,
                        width,
                        height);
             QGraphicsRectItem *qRect = new QGraphicsRectItem(rect);
-            (*matrix)[i].push_back(qRect);
+            matrix[i][j] = qRect;
         }
     }
 
     return matrix;
 }
 
-void CellMatrix::Update_matrix(const std::vector<std::vector<int>> matrix) {
+void CellMatrix::Update_matrix(const std::array<std::array<int, COLUMNS>, ROWS> matrix) {
 
     // check if matrix is of valid size
-    if (matrix.size() != cellmatrix->size() || matrix[0].size() != cellmatrix[0].size())  {
+    if (matrix.size() != cellmatrix.size() || matrix[0].size() != cellmatrix[0].size())  {
         qDebug() << "QDEBUG: Matrices don't have same size!";
-        qDebug() << "arg matrix: " << matrix.size() << "X" << matrix[0].size() << "\ncellmatrix: " << cellmatrix->size() << "X" << cellmatrix[0].size();
+        qDebug() << "arg matrix: " << matrix.size() << "X" << matrix[0].size() << "\ncellmatrix: " << cellmatrix.size() << "X" << cellmatrix[0].size();
         qTerminate();
     }
 
@@ -41,17 +40,17 @@ void CellMatrix::Update_matrix(const std::vector<std::vector<int>> matrix) {
     for (int i = 0; i < matrix.size(); i++)  {
         for (int j = 0; j < matrix[0].size(); j++)  {
             if (matrix[i][j] == 1)  {
-                cellmatrix[0][i][j]->setBrush(Qt::black);
+                cellmatrix[i][j]->setBrush(Qt::black);
             }
             else  {
-                cellmatrix[0][i][j]->setBrush(Qt::white);
+                cellmatrix[i][j]->setBrush(Qt::white);
             }
         }
     }
 }
 
 void CellMatrix::clearCells() {
-    for (auto row : (*cellmatrix))  {
+    for (auto row : cellmatrix)  {
         for (auto rectangle : row)  {
             rectangle->setBrush(Qt::white);
         }
@@ -59,7 +58,7 @@ void CellMatrix::clearCells() {
 }
 
 
-CellMatrix::CellMatrix(QWidget *parent, const int &rows, const int &columns) :
+CellMatrix::CellMatrix(QWidget *parent) :
         QGraphicsView(parent)  {
 
     this->setGeometry( QRect(0, 0, 700, 700));
@@ -73,17 +72,17 @@ CellMatrix::CellMatrix(QWidget *parent, const int &rows, const int &columns) :
     this->setLayout(layout);
 
     // cells creation
-    if (rows < 0 ||
-        rows > 200 ||
-        columns < 0 ||
-        columns > 200
+    if (ROWS < 0 ||
+        ROWS > 200 ||
+        COLUMNS < 0 ||
+        COLUMNS > 200
         ) {
         qDebug() << "QDEBUG: Matrix to be created is too large! (max 200x200) Terminating...";
         qTerminate();
     }
 
-    cellmatrix = this->create_cell_matrix(rows, columns);
-    for (auto row : (*cellmatrix))  {
+    cellmatrix = this->create_cell_matrix();
+    for (auto row : cellmatrix)  {
         for (auto rectangle : row)  {
             scene->addItem(rectangle);
         }
@@ -98,6 +97,5 @@ CellMatrix::~CellMatrix() {
         delete item;
     }
     delete scene;
-    delete cellmatrix;
 }
 

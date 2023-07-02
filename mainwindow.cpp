@@ -7,13 +7,12 @@
 #include "mainwindow.h"
 
 
-MainWindow::MainWindow(QWidget *parent, const int &rows, const int &columns) :
+MainWindow::MainWindow(QWidget *parent) :
         QMainWindow(parent)  {
-
 
     // widgets
     central_widget = new QWidget(this);
-    matrix_widget = new CellMatrix(this, rows, columns);
+    matrix_widget = new CellMatrix(this);
     stats_widget = new Statistics(this);
     controls_widget = new Controls(this);
 
@@ -26,19 +25,20 @@ MainWindow::MainWindow(QWidget *parent, const int &rows, const int &columns) :
     this->setCentralWidget(central_widget);
 
     // backend init
-    backend = new Backend(rows, columns, controls_widget->GetRules());
+    backend = new Backend(controls_widget->GetRules());
     
     // timer delay (default)
     delay_ms = 100; 
 
     // timer set
     timer.setInterval(delay_ms);
-    timer.start();
+    timerTick();
     QObject::connect(&timer, SIGNAL(timeout()), this, SLOT(timerTick()));
 
     // connections between Controls and window
     QObject::connect(controls_widget, &Controls::start, this, &MainWindow::start);
     QObject::connect(controls_widget, &Controls::pause, this, &MainWindow::pause);
+    QObject::connect(controls_widget, &Controls::restart, this, &MainWindow::restart);
 }
 
 void MainWindow::timerTick() {
@@ -55,6 +55,10 @@ void MainWindow::start()  {
 
 void MainWindow::pause()  {
     timer.stop();
+}
+
+void MainWindow::restart()  {
+    //backend->NewPop(RANDOM_POP);
 }
 
 MainWindow::~MainWindow() {

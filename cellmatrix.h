@@ -7,6 +7,9 @@
 
 #include "PopCreator.h"
 
+#define ROWS 100
+#define COLUMNS 100
+
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class CellMatrix; }
@@ -16,11 +19,11 @@ class CellMatrix : public QGraphicsView {
 Q_OBJECT
 
 public:
-    explicit CellMatrix(QWidget *parent = nullptr, const int &rows = 0, const int &columns = 0);
+    explicit CellMatrix(QWidget *parent = nullptr);
     ~CellMatrix() override;
 
     // method to set living and dead cells
-    void Update_matrix(const std::vector<std::vector<int>> matrix);
+    void Update_matrix(const std::array<std::array<int, COLUMNS>, ROWS> matrix);
 
 
 private:
@@ -33,8 +36,8 @@ private:
     QGridLayout *layout;
 
     // matrix of cells
-    std::vector<std::vector<QGraphicsRectItem*>>* create_cell_matrix(unsigned int rows, unsigned int columns);
-    std::vector<std::vector<QGraphicsRectItem*>> *cellmatrix;
+    std::array<std::array<QGraphicsRectItem*, COLUMNS>, ROWS> create_cell_matrix();
+    std::array<std::array<QGraphicsRectItem*, COLUMNS>, ROWS> cellmatrix;
 
     // clear whole matrix (make all cells dead)
     void clearCells();

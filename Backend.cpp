@@ -4,16 +4,16 @@
 
 #include "Backend.h"
 
-std::vector<std::pair<int, int>> Backend::blank_pop() {
-    std::vector<std::pair<int, int>> positions;
+t_pop Backend::blank_pop() {
+    t_pop positions;
     return positions;
 }
 
-std::vector<std::pair<int, int>> Backend::random_pop() {
-    std::vector<std::pair<int, int>> positions;
+t_pop Backend::random_pop() {
+    t_pop positions;
     srand(time(0));
-    for (int i = 0; i < rows; i++) {
-        for (int j = 0; j < columns; j++)  {
+    for (int i = 0; i < ROWS; i++) {
+        for (int j = 0; j < COLUMNS; j++)  {
             if (rand() % 2 == 1)  {
                 positions.push_back(std::pair<int, int>(i, j));
             }
@@ -22,11 +22,11 @@ std::vector<std::pair<int, int>> Backend::random_pop() {
     return positions;
 }
 
-std::vector<std::pair<int, int>> Backend::glider_pop() {
-    std::vector<std::pair<int, int>> positions;
+t_pop Backend::glider_pop() {
+    t_pop positions;
 
-    int center_row = rows/2;
-    int center_column = columns/2;
+    int center_row = ROWS/2;
+    int center_column = COLUMNS/2;
 
 
     //  010
@@ -44,8 +44,7 @@ std::vector<std::pair<int, int>> Backend::glider_pop() {
 
 
 
-Backend::Backend(const int &rows, const int &columns, std::string rules)
-    : rows(rows), columns(columns) {
+Backend::Backend(std::string rules) {
 
     int to_sur = rules.find('S');
     int to_bb = rules.find('B');
@@ -61,19 +60,17 @@ Backend::Backend(const int &rows, const int &columns, std::string rules)
         to_be_born += rules[i];
     }
 
-    matrix = create_matrix(rows, columns, random_pop());
+    NewPop();
 }
 
-std::vector<std::vector<int>> Backend::create_matrix(const int &rows, const int &columns, const std::vector<std::pair<int, int>> def_positions)  {
+std::array<std::array<int, COLUMNS>, ROWS> Backend::create_matrix(const t_pop def_positions)  {
 
     // create blank matrix
-    std::vector<std::vector<int>> matrix = {};
-    for (int i = 0; i < rows; i++) {
-        std::vector<int> *vec = new std::vector<int>();
-        for (int j = 0; j < columns; j++)  {
-            vec->push_back(0);
+    std::array<std::array<int, COLUMNS>, ROWS> matrix;
+    for (int i = 0; i < ROWS; i++) {
+        for (int j = 0; j < COLUMNS; j++)  {
+            matrix[i][j] = 0;
         }
-        matrix.push_back(*vec);
     }
 
     // fill the matrix with default positions
@@ -89,22 +86,22 @@ int Backend::get_living_cells_around(const int &row, const int &column) {
     int pos_row = row, pos_col = column;
     int cells_count = 0;
 
-    if (pos_row + 1 < rows)
+    if (pos_row + 1 < ROWS)
         cells_count = matrix[pos_row + 1][pos_col] == 1 ? cells_count + 1 : cells_count;
     if (pos_row - 1 >= 0)  
         cells_count = matrix[pos_row - 1][pos_col] == 1? cells_count + 1 : cells_count;
 
-    if (pos_col + 1 < columns)
+    if (pos_col + 1 < COLUMNS)
         cells_count = matrix[pos_row][pos_col + 1] == 1 ? cells_count + 1 : cells_count;
     if (pos_col - 1 >= 0)
         cells_count = matrix[pos_row][pos_col - 1] == 1 ? cells_count + 1 : cells_count;
 
-    if (pos_row + 1 < rows && pos_col + 1 < columns)
+    if (pos_row + 1 < ROWS && pos_col + 1 < COLUMNS)
         cells_count = matrix[pos_row + 1][pos_col + 1] == 1 ? cells_count + 1 : cells_count;
-    if (pos_row + 1 < rows && pos_col - 1 >= 0)
+    if (pos_row + 1 < ROWS && pos_col - 1 >= 0)
         cells_count = matrix[pos_row + 1][pos_col - 1] == 1 ? cells_count + 1 : cells_count;
 
-    if (pos_row - 1 >= 0 && pos_col + 1 < columns)
+    if (pos_row - 1 >= 0 && pos_col + 1 < COLUMNS)
         cells_count = matrix[pos_row - 1][pos_col + 1] == 1 ? cells_count + 1 : cells_count;
     if (pos_row - 1 >= 0 && pos_col - 1>= 0)
         cells_count = matrix[pos_row - 1][pos_col - 1] == 1 ? cells_count + 1 : cells_count;
@@ -113,35 +110,32 @@ int Backend::get_living_cells_around(const int &row, const int &column) {
 }
 
 void Backend::NextPop() {
-    std::vector<std::vector<int>> new_matrix;
+    std::array<std::array<int, COLUMNS>, ROWS> new_matrix;
     int new_living_cells = 0;
 
-    for (int row = 0; row < this->rows; row++)  {
-        std::vector<int> vec;
-        for (int col = 0; col < this->columns; col++)  {
+    for (int row = 0; row < ROWS; row++)  {
+        for (int col = 0; col < COLUMNS; col++)  {
             int cells_amount = get_living_cells_around(row, col);
             // if cell is alive, check survival, otherwise check if to_be_born is possible
             if (matrix[row][col] == 1)  {
                 if (contains_num(to_survive, cells_amount)) {
-                    vec.push_back(1);
+                    new_matrix[row][col] = 1;
                     new_living_cells++;
                 }
                 else {
-                    vec.push_back(0);
+                    new_matrix[row][col] = 0;
                 }
             }
             else {
                 if (contains_num(to_be_born, cells_amount)) {
-                    vec.push_back(1);
+                    new_matrix[row][col] = 1;
                     new_living_cells++;
                 }
                 else {
-                    vec.push_back(0);
+                    new_matrix[row][col] = 0;
                 }
             }
-
         }
-        new_matrix.push_back(vec);
     }
 
     matrix = new_matrix;

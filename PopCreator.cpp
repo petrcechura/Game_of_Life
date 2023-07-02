@@ -1,30 +1,29 @@
 #include "PopCreator.h"
 
 
-PopCreator::PopCreator(QWidget *parent, const int &rows, const int &columns) : 
+PopCreator::PopCreator(QWidget *parent) : 
         QMainWindow(parent) {
         
         const int BTN_SIZE = 10;
 
         // set widget and its layout
         central_widget = new QWidget(this);
-        central_widget->setFixedSize(QSize(rows * BTN_SIZE, columns * BTN_SIZE));
+        central_widget->setFixedSize(QSize(P_ROWS * BTN_SIZE, P_COLUMNS * BTN_SIZE));
         layout = new QGridLayout();
-        layout->setGeometry(QRect(0, 0, rows * BTN_SIZE, columns * BTN_SIZE));      // size of widget depends on amount of btns
+        layout->setGeometry(QRect(0, 0, P_ROWS * BTN_SIZE, P_COLUMNS * BTN_SIZE));      // size of widget depends on amount of btns
         layout->setSpacing(0);
         central_widget->setLayout(layout);
         this->setCentralWidget(central_widget);
 
 
         // create rectangles
-        btn_matrix = new std::vector<std::vector<QPushButton*>>();
-        for (int i = 0; i < rows; i++)  {
-            btn_matrix->push_back(std::vector<QPushButton*>());
-            for (int j = 0; j < columns; j++)  {          
+        btn_matrix = new std::array<std::array<QPushButton*, P_COLUMNS>, P_ROWS>();
+        for (int i = 0; i < P_ROWS; i++)  {
+            for (int j = 0; j < P_COLUMNS; j++)  {          
                 QPushButton *btn = new QPushButton(this);
                 btn->setFixedSize(QSize(BTN_SIZE, BTN_SIZE));
                 layout->addWidget(btn, i, j);
-                (*btn_matrix)[i].push_back(btn);
+                (*btn_matrix)[i][j] = btn;
                 QObject::connect((*btn_matrix)[i][j], &QPushButton::clicked, this, [this, i, j]() { onClick(i, j); });
 
             }
@@ -45,7 +44,7 @@ void PopCreator::onClick(int row, int col)  {
 }
 
 std::vector<std::pair<int, int>> PopCreator::GetPositions()  {
-    std::vector<std::pair<int, int>> vec = {};
+    t_pop vec = {};
     for (int i = 0; i < btn_matrix->size(); i++)  {
         for (int j = 0; j < btn_matrix[0].size(); j++)  {
             if (btn_matrix[0][i][j]->styleSheet() == "background-color: black")  {

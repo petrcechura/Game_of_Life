@@ -18,7 +18,7 @@ class MainWindow : public QMainWindow {
 Q_OBJECT
 
 public:
-    explicit MainWindow(QWidget *parent = nullptr, const int &rows = 100, const int &columns = 100);
+    explicit MainWindow(QWidget *parent = nullptr);
 
     ~MainWindow() override;
 
@@ -47,6 +47,7 @@ private slots:
     void timerTick();
     void start();
     void pause();
+    void restart();
 };
 
 

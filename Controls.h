@@ -45,7 +45,7 @@ private:
 
     // TODO list to show avaiable pops
 
-public slots:
+signals:
     void start();
     void pause();
     void restart();
