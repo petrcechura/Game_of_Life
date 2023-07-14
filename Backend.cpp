@@ -69,10 +69,10 @@ void Backend::SetRules(std::string rules)  {
 
 }
 
-std::array<std::array<int, COLUMNS>, ROWS> Backend::create_matrix(const t_pop def_positions)  {
+t_matr_int Backend::create_matrix(const t_pop def_positions)  {
 
     // create blank matrix
-    std::array<std::array<int, COLUMNS>, ROWS> matrix;
+    t_matr_int matrix;
     for (int i = 0; i < ROWS; i++) {
         for (int j = 0; j < COLUMNS; j++)  {
             matrix[i][j] = 0;
@@ -116,7 +116,7 @@ int Backend::get_living_cells_around(const int &row, const int &column) {
 }
 
 void Backend::NextPop() {
-    std::array<std::array<int, COLUMNS>, ROWS> new_matrix;
+    t_matr_int new_matrix;
     int new_living_cells = 0;
 
     for (int row = 0; row < ROWS; row++)  {

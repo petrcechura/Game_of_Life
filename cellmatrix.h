@@ -11,6 +11,10 @@
 #define ROWS 100
 #define COLUMNS 100
 
+#define t_matr_int std::array<std::array<int, COLUMNS>, ROWS>
+#define t_matr_rect std::array<std::array<QGraphicsRectItem*, COLUMNS>, ROWS>
+
+
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class CellMatrix; }
@@ -24,7 +28,7 @@ public:
     ~CellMatrix() override;
 
     // method to set living and dead cells
-    void Update_matrix(const std::array<std::array<int, COLUMNS>, ROWS> matrix);
+    void Update_matrix(const t_matr_int* matrix);
 
 
 private:
@@ -37,8 +41,8 @@ private:
     QGridLayout *layout;
 
     // matrix of cells
-    std::array<std::array<QGraphicsRectItem*, COLUMNS>, ROWS> create_cell_matrix();
-    std::array<std::array<QGraphicsRectItem*, COLUMNS>, ROWS> cellmatrix;
+    t_matr_rect create_cell_matrix();
+    t_matr_rect cellmatrix;
 
     // clear whole matrix (make all cells dead)
     void clearCells();

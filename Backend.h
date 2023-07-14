@@ -13,6 +13,7 @@
 #include "statistics.h"
 
 
+
 class Backend {
 
 public:
@@ -21,7 +22,7 @@ public:
     ~Backend();
 
     // get current calculated positions to print
-    std::array<std::array<int, COLUMNS>, ROWS> GetMatrix() { return matrix;};
+    t_matr_int* GetMatrix() { return &matrix;};
     
     // create next population (calculate positions due to rules)
     void NextPop();
@@ -40,7 +41,7 @@ public:
 
 private:
 
-    std::array<std::array<int, COLUMNS>, ROWS> matrix;
+    t_matr_int matrix;
     std::string to_survive;
     std::string to_be_born;
     int living_cells;
@@ -48,7 +49,7 @@ private:
     // analyze cell and return amount of living cells around
     int get_living_cells_around(const int &row, const int &column);
     // create matrix
-    std::array<std::array<int, COLUMNS>, ROWS> create_matrix(const t_pop def_positions);
+    t_matr_int create_matrix(const t_pop def_positions);
 
     // check if given string contains given number
     inline bool contains_num(std::string str, int num);
