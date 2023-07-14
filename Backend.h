@@ -13,7 +13,6 @@
 #include "statistics.h"
 
 
-// "static" class
 class Backend {
 
 public:
