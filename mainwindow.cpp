@@ -34,6 +34,7 @@ MainWindow::MainWindow(QWidget *parent) :
     timer.setInterval(delay_ms);
     timerTick();
     QObject::connect(&timer, SIGNAL(timeout()), this, SLOT(timerTick()));
+    timer.start();
 
     // connections between Controls and window
     QObject::connect(controls_widget, &Controls::start, this, &MainWindow::start);

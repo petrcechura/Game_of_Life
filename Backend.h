@@ -22,7 +22,7 @@ public:
     ~Backend();
 
     // get current calculated positions to print
-    t_matr_int* GetMatrix() { return &matrix;};
+    const t_matr_int& GetMatrix() { return matrix;};
     
     // create next population (calculate positions due to rules)
     void NextPop();

@@ -28,7 +28,7 @@ public:
     ~CellMatrix() override;
 
     // method to set living and dead cells
-    void Update_matrix(const t_matr_int* matrix);
+    void Update_matrix(const t_matr_int &matrix);
 
 
 private:

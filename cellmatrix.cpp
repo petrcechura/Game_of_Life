@@ -27,19 +27,19 @@ t_matr_rect CellMatrix::create_cell_matrix() {
     return matrix;
 }
 
-void CellMatrix::Update_matrix(const t_matr_int* matrix) {
+void CellMatrix::Update_matrix(const t_matr_int &matrix) {
 
     // check if matrix is of valid size
-    if (matrix->size() != cellmatrix.size() || matrix[0].size() != cellmatrix[0].size())  {
+    if (matrix.size() != cellmatrix.size() || matrix[0].size() != cellmatrix[0].size())  {
         qDebug() << "QDEBUG: Matrices don't have same size!";
-        qDebug() << "arg matrix: " << matrix->size() << "X" << matrix[0].size() << "\ncellmatrix: " << cellmatrix.size() << "X" << cellmatrix[0].size();
+        qDebug() << "arg matrix: " << matrix.size() << "X" << matrix[0].size() << "\ncellmatrix: " << cellmatrix.size() << "X" << cellmatrix[0].size();
         qTerminate();
     }
 
 
-    for (int i = 0; i < matrix->size(); i++)  {
+    for (int i = 0; i < matrix.size(); i++)  {
         for (int j = 0; j < matrix[0].size(); j++)  {
-            if (matrix[0][i][j] == 1)  {
+            if (matrix[i][j] == 1)  {
                 cellmatrix[i][j]->setBrush(Qt::black);
             }
             else  {
