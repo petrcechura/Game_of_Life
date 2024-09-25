@@ -4,6 +4,18 @@ see https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life
 
 Program uses Cmake (version 3.22) to handle building a compiling.
 
+# How to run
+The app is managed by a **qmake** build system which automatically generates the Makefile for cpp compilation
+## Dependencies
+	* Qt5
+	* make
+	* qmake
+	* TODO
+## How to build the app
+Run ```make all``` for a complete build
+TODO
+
+
 # Hierarchy
 * MainWindow (window) – Used to link all widgets, their signals, cell positions etc
     * CellMatrix (Widget) – Visualises living and dead cells, calculated in Backend
