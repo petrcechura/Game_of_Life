@@ -1,17 +1,19 @@
 
-PRO_FILE=./build/Game_of_Life.pro
+PROJECT=Game_of_Life
+
+PRO_FILE=./build/$(PROJECT).pro
 SRC_DIR=./src
 BUILD_DIR=./build
 BIN_DIR=./bin
 MAKEFILE_DIR=./build/
 
 .PHONY: all
-all: build qmake compile
+all: build qmake compile move_to_bin
 
 
 .PHONY: build
 build:
-	@mkdir $(BUILD_DIR)
+	@if [ ! -d $(BUILD_DIR) ]; then mkdir $(BUILD_DIR); fi
 	@echo "QT += core gui" > $(PRO_FILE) 
 	@echo "greaterThan(QT_MAJOR_VERSION, 4): QT += widgets" >> $(PRO_FILE)
 	@echo "CONFIG += c++17\n\n" >> $(PRO_FILE)
@@ -28,12 +30,15 @@ qmake:
 
 .PHONY: compile
 compile:
-	@mkdir $(BIN_DIR)
+	@if [ ! -d $(BIN_DIR) ]; then mkdir $(BIN_DIR); fi
 	@(cd $(MAKEFILE_DIR) && make)
 
 .PHONY: clean
 clean:
-	rm -rf $(BUILD_DIR)
-	rm -rf $(BIN_DIR)
-	rm $(PRO_FILE)
+	@rm -rf $(BUILD_DIR)
+	@rm -rf $(BIN_DIR)
+	@rm $(PRO_FILE)
+
+move_to_bin:
+	@mv $(BUILD_DIR)/$(PROJECT) $(BIN_DIR)/$(PROJECT)
 
