@@ -5,25 +5,25 @@ see https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life for more information.
 # How to run the app
 The app is managed by a **qmake** build system which automatically generates the Makefile for C++ compilation
 ## Dependencies (for Linux)
-	* Qt5
-	* make (4.3)
-	* qmake (3.1)
-	* g++ (13.2)
+* Qt5
+* make (4.3)
+* qmake (3.1)
+* g++ (13.2)
 ## How to build the app
-Install all dependencies
+* Install all dependencies
 	* Qt (https://www.qt.io/download-dev)
 	* make
-		- Ubuntu: ```sudo apt install make```
+		* Ubuntu: ```sudo apt install make```
 	* qmake
-		- It should be installed along with Qt5
-		- If not present, try to reinstall Qt5 or manually install qmake via Qt Maintance tool
+		* It should be installed along with Qt5
+		* If not present, try to reinstall Qt5 or manually install qmake via Qt Maintance tool
 	* g++
-		- Ubuntu: ```sudo apt install g++```
-Run ```make all``` in a root directory for a complete build
-A binary file is present inside ```bin/``` directory
-Run ```make run``` to run an app after successful build
+		* Ubuntu: ```sudo apt install g++```
+* Run ```make all``` in a root directory for a complete build
+	* A binary file is present inside ```bin/``` directory
+* Run ```make run``` to run an app after successful build
 ## How to use the app
-The content on the field is generated randomly after each run.
+* The content on the field is generated randomly after each run.
 	* use **pause** to stop the time, then **start** again
 	* use **restart** to restart entire population to a random state
 	* use the bottom field to change rules a game is based on
