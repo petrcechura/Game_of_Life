@@ -1,20 +1,36 @@
 # Game_of_Life
-Simple Qt app (written in C++) to show and modify Game of Life:
-see https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life
+Simple Qt app, written in C++, that runs a Game of Life with specified rules (default 23/3 as known).
+see https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life for more information.
 
-Program uses Cmake (version 3.22) to handle building a compiling.
-
-# How to run
-The app is managed by a **qmake** build system which automatically generates the Makefile for cpp compilation
-## Dependencies
+# How to run the app
+The app is managed by a **qmake** build system which automatically generates the Makefile for C++ compilation
+## Dependencies (for Linux)
 	* Qt5
-	* make
-	* qmake
-	* TODO
+	* make (4.3)
+	* qmake (3.1)
+	* g++ (13.2)
 ## How to build the app
-Run ```make all``` for a complete build
-TODO
-
+Install all dependencies
+	* Qt (https://www.qt.io/download-dev)
+	* make
+		- Ubuntu: ```sudo apt install make```
+	* qmake
+		- It should be installed along with Qt5
+		- If not present, try to reinstall Qt5 or manually install qmake via Qt Maintance tool
+	* g++
+		- Ubuntu: ```sudo apt install g++```
+Run ```make all``` in a root directory for a complete build
+A binary file is present inside ```bin/``` directory
+Run ```make run``` to run an app after successful build
+## How to use the app
+The content on the field is generated randomly after each run.
+	* use **pause** to stop the time, then **start** again
+	* use **restart** to restart entire population to a random state
+	* use the bottom field to change rules a game is based on
+		- formatting is *[cells around to survive]/[cells around to be born]*
+		- use **apply** button to apply custom rules
+		- rules are immediately in use
+		- see https://cs.wikipedia.org/wiki/Hra_%C5%BEivota#P%C5%99ehled_tvar%C5%AF for cool custom rules
 
 # Hierarchy
 * MainWindow (window) – Used to link all widgets, their signals, cell positions etc

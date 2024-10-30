@@ -10,6 +10,10 @@ MAKEFILE_DIR=./build/
 .PHONY: all
 all: build qmake compile move_to_bin
 
+.PHONY: run
+run: all
+	@./bin/$(PROJECT)
+
 
 .PHONY: build
 build:
@@ -35,9 +39,11 @@ compile:
 
 .PHONY: clean
 clean:
-	@rm -rf $(BUILD_DIR)
-	@rm -rf $(BIN_DIR)
-	@rm $(PRO_FILE)
+	@if [ -d $(BUILD_DIR) ]; then rm -rf $(BUILD_DIR); fi
+	@if [ -d $(BIN_DIR) ]; then rm -rf $(BIN_DIR); fi
+	@if [ -e $(PRO_FILE) ]; then rm $(PRO_FILE); fi
+	@if [ -e $(PROJECT).pro.user ]; then rm $(PROJECT).pro.user; fi
+	@echo Makefile: clean succesful
 
 move_to_bin:
 	@mv $(BUILD_DIR)/$(PROJECT) $(BIN_DIR)/$(PROJECT)
